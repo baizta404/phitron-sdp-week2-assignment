@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Towhid's Assignment</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -14,10 +17,10 @@
 
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body class=" bg-light">
+  <body class="bg-light">
     <div class="container-fluid">
       <header>
-        <div class="row d-flex justify-content-center my-5">
+        <div class="row d-flex justify-content-center my-5 mb-3">
           <div class="col-md-6">
             <div class="d-flex gap-3 align-items-center">
               <input
@@ -44,17 +47,27 @@
           <div class="col-md-9 mb-5">
             <div id="menu-container" class="row">
               <!-- here we will put our item carts -->
-              
             </div>
           </div>
           <div class="col-md-3">
             <div class="text-center bg-primary p-2">
-                <h4 class="my-3"><i class="bi bi-cart2"></i> Your Cart</h4>
-                <h5 class=" my-3">You have 0 item in cart</h5>
+              <h4 class="my-3"><i class="bi bi-cart2"></i> Your Cart</h4>
+              <h5 class="my-3" id="cart-count">You have 0 item in cart</h5>
             </div>
-            <hr>
-            <div id="cart-container">
-              <h3 class="text-center mt-5">Empty Cart</h3>
+            <hr />
+            <div id="cart-container mt-5">
+              <table class="table table-bordered table-striped text-center mb-5">
+                <thead>
+                  <tr>
+                    <th>SL</th>
+                    <th>Image</th>
+                    <th>Product</th>
+                  </tr>
+                </thead>
+                <tbody id="table-body" class="fw-bold">
+                  <!-- ekhan a table row dibo -->
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -69,9 +82,7 @@
     >
       <div class="modal-dialog">
         <div class="modal-content" id="modalcontent">
-          
-            <!-- ekan a modal thakbo -->
-          
+          <!-- ekhan a modal thakbo -->
         </div>
       </div>
     </div>
@@ -84,11 +95,8 @@
     <script src="app.js"></script>
   </body>
 </html>
-<!-- {idDrink: '12130', strDrink: 'Scooter', strDrinkAlternate: null, strTags: null, strVideo: null, …}
-dateModified
-: 
-"2017-01-02 20:18:27"
-idDrink
+
+<!-- 
 : 
 "12130"
 strAlcoholic
@@ -112,132 +120,8 @@ strDrinkThumb
 strGlass
 : 
 "Cocktail glass"
-strIBA
-: 
-null
-strImageAttribution
-: 
-null
-strImageSource
-: 
-null
-strIngredient1
-: 
-"Brandy"
-strIngredient2
-: 
-"Amaretto"
-strIngredient3
-: 
-"Light cream"
-strIngredient4
-: 
-null
-strIngredient5
-: 
-null
-strIngredient6
-: 
-null
-strIngredient7
-: 
-null
-strIngredient8
-: 
-null
-strIngredient9
-: 
-null
-strIngredient10
-: 
-null
-strIngredient11
-: 
-null
-strIngredient12
-: 
-null
-strIngredient13
-: 
-null
-strIngredient14
-: 
-null
-strIngredient15
-: 
-null
+
 strInstructions
 : 
 "Shake all ingredients well with cracked ice, strain into a cocktail glass, and serve."
-strInstructionsDE
-: 
-"Alle Zutaten gut mit gebrochenem Eis schütteln, in ein Cocktailglas abseihen und servieren."
-strInstructionsES
-: 
-"Agitar bien todos los ingredientes con hielo picado, colar en una copa de cóctel y servir."
-strInstructionsFR
-: 
-null
-strInstructionsIT
-: 
-"Shakerare bene tutti gli ingredienti con ghiaccio tritato, filtrare in una coppetta da cocktail e servire."
-strInstructionsZH-HANS
-: 
-null
-strInstructionsZH-HANT
-: 
-null
-strMeasure1
-: 
-"1 oz "
-strMeasure2
-: 
-"1 oz "
-strMeasure3
-: 
-"1 oz "
-strMeasure4
-: 
-null
-strMeasure5
-: 
-null
-strMeasure6
-: 
-null
-strMeasure7
-: 
-null
-strMeasure8
-: 
-null
-strMeasure9
-: 
-null
-strMeasure10
-: 
-null
-strMeasure11
-: 
-null
-strMeasure12
-: 
-null
-strMeasure13
-: 
-null
-strMeasure14
-: 
-null
-strMeasure15
-: 
-null
-strTags
-: 
-null
-strVideo
-: 
-null
-[[Prototype]]
-:  -->
-<!-- Object -->
+-->

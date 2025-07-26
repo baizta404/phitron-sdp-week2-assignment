@@ -4,11 +4,22 @@ const searchBtn = document.getElementById("search-btn");
 const menuContainer = document.getElementById("menu-container");
 const cartContainer = document.getElementById("cart-container");
 const modalContent = document.getElementById("modalcontent");
+const tableBody = document.getElementById("table-body");
+const cartCount = document.getElementById("cart-count");
 
 const fetchItems = async(nam)=>{
     const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${nam}`);
     const items = await res.json();
     // console.log(items.drinks)
+    if(!items.drinks){
+        menuContainer.innerHTML = `
+        <div class="col-12 mt-5">
+            <h1 class="text-center"><i class="bi bi-database-x"></i></h1>
+            <h1 class="text-center">Your Searched Drink Is Not Found</h1>
+        </div>
+        `;
+        return;
+    }
     displayItems((items.drinks));
 }
 
@@ -17,6 +28,7 @@ const displayItems = (items) =>{
     menuContainer.innerHTML=``;
     items.forEach(item => {
         // console.log(item)
+        const isInCart = cart.find(e=>e.idDrink === item.idDrink) 
         //card banaite hoibo then eidire card a dite hoibo
         const itemCard = document.createElement('div');
         itemCard.className = "col-md-4 mb-3";
@@ -24,32 +36,31 @@ const displayItems = (items) =>{
         <div class="card shadow-sm">
             <img src="${item.strDrinkThumb}" class="card-img-top img-card" alt="item image">
             <div class="card-body">
-                <h5 class="card-title text-center">Name : ${item.strDrink}</h5>
-                <p class="text-center">Category : ${item.strCategory}</p>
-                <p class="card-text text-center">Instructions : ${item.strInstructions.slice(0,15)}...</p>
+                <h5 class="card-title"><span class="fw-bold">Name :</span> ${item.strDrink}</h5>
+                <p class=""><span class="fw-bold">Category :</span> ${item.strCategory}</p>
+                <p class="card-text"><span class="fw-bold">Instructions :</span> ${item.strInstructions.slice(0,15)}...</p>
                 <div class="d-flex justify-content-around">
-                    <button class="btn btn-cart btn-primary" type="button" data-id="${item.idDrink}">Add to Group</button>
-                    <button class="btn btn-details btn-primary" type="button" data-id="${item.idDrink}">Details</button>
+                    <button class="btn btn-cart ${isInCart?'btn-secondary disabled':'btn-outline-secondary'}" type="button" data-id="${item.idDrink}">${isInCart ? 'Added to Group' : 'Add to Group'}</button>
+                    <button class="btn btn-details btn-outline-secondary" type="button" data-id="${item.idDrink}">Details</button>
                 </div>
             </div>
         </div>
         `;
         menuContainer.append(itemCard);
+
+        //details er btn er kam
+        itemCard.querySelector(".btn-details").addEventListener('click',()=> fetchDetails(item.idDrink));
+
+        if (!isInCart) {
+            //cart a add kroar button
+            itemCard.querySelector('.btn-cart').addEventListener('click', () => {
+                addToCart(item);
+                displayItems(items);
+            });
+        }
+        
     });
-    //modal dekhamu
-    document.querySelectorAll(".btn-details").forEach(btn=>{
-        const id = btn.dataset.id;
-        btn.addEventListener('click',()=>{
-            fetchDetails(id)
-        })
-    })
-    //cart a add kormu
-    document.querySelectorAll(".btn-cart").forEach(btn=>{
-        const id = btn.dataset.id;
-        btn.addEventListener('click',()=>{
-            addToCart(id);
-        })
-    })
+    
 }
 //cart a add kormu
 const addToCart = (item)=>{
@@ -58,6 +69,27 @@ const addToCart = (item)=>{
 }
 
 const showCart= ()=>{
+    const n = cart.length;
+    if(n === 0){
+        return;
+    }
+    if(n>7){
+        alert("Sorry!!! 7 tar beshi hoile pinik beshi hoi jaibo.");
+        return;
+    }
+    
+    cartCount.innerText= `You have ${n} ${n>1?'items':'item'} in cart`
+    
+    const item = cart[n-1];
+        console.log(item);
+        const tRow = document.createElement("tr");
+        tRow.innerHTML = `
+        <td>${cart.length}</td>
+        <td><img class="cart-img" src="${item.strDrinkThumb}"/></td>
+        <td>${item.strDrink}</td>
+        `;
+        tableBody.appendChild(tRow);
+
     
 }
 
@@ -96,7 +128,13 @@ const fetchDetails = async(id)=>{
 
 searchBtn.addEventListener('click', () => {
     const searchValue = searchBox.value.trim();
-    menuContainer.innerHTML=`Lokking For Your Item ${searchValue}`;
+    menuContainer.innerHTML = `
+        <div class="col-12 mt-5">
+            <h1 class="text-center"><i class="bi bi-search"></i></h1>
+            <br>
+            <h3 class="text-center">Searching.........</h3>
+        </div>
+        `;
     fetchItems(searchValue)
 });
 
