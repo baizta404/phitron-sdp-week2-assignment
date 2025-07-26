@@ -1,0 +1,11 @@
+.img-card{
+    height: 300px;
+    padding: 2px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+.img-detail{
+    height: 350px;
+    border-radius: 50px;
+    object-fit: cover;
+}
